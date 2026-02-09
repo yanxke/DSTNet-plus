@@ -24,8 +24,12 @@ def Dtype(t):
 @cupy._util.memoize(for_each_device=True)
 def load_kernel(kernel_name, code, **kwargs):
     code = Template(code).substitute(**kwargs)
-    kernel_code = cupy.cuda.compile_with_cache(code)
-    return kernel_code.get_function(kernel_name)
+    if hasattr(cupy.cuda, 'compile_with_cache'):
+        kernel_code = cupy.cuda.compile_with_cache(code)
+        return kernel_code.get_function(kernel_name)
+    # CuPy>=13 removed compile_with_cache; RawModule provides equivalent JIT.
+    module = cupy.RawModule(code=code, name_expressions=(kernel_name,))
+    return module.get_function(kernel_name)
 
 
 CUDA_NUM_THREADS = 1024
