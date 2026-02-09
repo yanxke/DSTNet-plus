@@ -23,7 +23,7 @@ DSTNet+ is an extension of [DSTNet](https://github.com/xuboming8/DSTNet).
 ### 1. Environment Set Up
 > - Python 3.9, PyTorch == 1.13
 > - BasicSR 1.4.2
-> - Platforms: Ubuntu 18.04, cuda-11
+> - Platforms: Ubuntu 18.04 - 24.04, cuda-12
 
 ```bash
 git clone https://github.com/sunny2109/DSTNet-plus.git
@@ -34,7 +34,7 @@ conda activate dstnetplus
 pip install -r requirements.txt
 # Install cupy
 # Please make sure that the installed Cupy version matches your existing CUDA installation!
-pip install cupy-cuda11x
+pip install cupy-cuda12x
 # Install BasicSR
 python setup.py develop
 ```
